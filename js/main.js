@@ -7,7 +7,7 @@ import {gameThree} from './gameThree';
 import {stats} from './stats';
 
 (function () {
-  let loadTemplate = (templateName, templateElement) => {
+  let loadTemplate = (templateElement) => {
     let node = document.createElement('span');
     let template = templateElement;
     let content = template.content ? template.content : template;
@@ -17,7 +17,7 @@ import {stats} from './stats';
 
 
   // Rules
-  let rulesElement = loadTemplate('rules', rules);
+  let rulesElement = loadTemplate(rules);
   let rulesSubmit = rulesElement.querySelector('.rules__button');
 
   rulesElement.querySelector('.rules__input').oninput = function () {
@@ -40,13 +40,13 @@ import {stats} from './stats';
   mainElement.after(switcher);
 
   let slides = [
-    loadTemplate('intro', intro),
-    loadTemplate('greeting', greeting),
+    loadTemplate(intro),
+    loadTemplate(greeting),
     rulesElement,
-    loadTemplate('game-1', gameOne),
-    loadTemplate('game-2', gameTwo),
-    loadTemplate('game-3', gameThree),
-    loadTemplate('stats', stats)
+    loadTemplate(gameOne),
+    loadTemplate(gameTwo),
+    loadTemplate(gameThree),
+    loadTemplate(stats)
   ];
   let current = -1;
 
