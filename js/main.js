@@ -57,14 +57,12 @@ import {stats} from './stats';
   };
 
   document.querySelector('.next').onclick = (e) => {
-    e.preventDefault();
     if (current < slides.length - 1) {
       select(current + 1);
     }
   };
 
   document.querySelector('.prev').onclick = (e) => {
-    e.preventDefault();
     if (current > 0) {
       select(current - 1);
     }
