@@ -60,8 +60,6 @@ import {stats} from './stats';
     e.preventDefault();
     if (current < slides.length - 1) {
       select(current + 1);
-    } else {
-      return;
     }
   };
 
@@ -69,8 +67,6 @@ import {stats} from './stats';
     e.preventDefault();
     if (current > 0) {
       select(current - 1);
-    } else {
-      return;
     }
   };
 
