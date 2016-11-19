@@ -1,8 +1,15 @@
-(function () {
+import {intro} from './intro';
+import {greeting} from './greeting';
+import {rules} from './rules';
+import {gameOne} from './gameOne';
+import {gameTwo} from './gameTwo';
+import {gameThree} from './gameThree';
+import {stats} from './stats';
 
-  let loadTemplate = (templateName) => {
+(function () {
+  let loadTemplate = (templateName, templateElement) => {
     let node = document.createElement('span');
-    let template = document.getElementById(templateName);
+    let template = templateElement;
     let content = template.content ? template.content : template;
     node.appendChild(content);
     return node.cloneNode(true);
@@ -10,7 +17,7 @@
 
 
   // Rules
-  let rulesElement = loadTemplate('rules');
+  let rulesElement = loadTemplate('rules', rules);
   let rulesSubmit = rulesElement.querySelector('.rules__button');
 
   rulesElement.querySelector('.rules__input').oninput = function () {
@@ -33,13 +40,13 @@
   mainElement.after(switcher);
 
   let slides = [
-    loadTemplate('intro'),
-    loadTemplate('greeting'),
+    loadTemplate('intro', intro),
+    loadTemplate('greeting', greeting),
     rulesElement,
-    loadTemplate('game-1'),
-    loadTemplate('game-2'),
-    loadTemplate('game-3'),
-    loadTemplate('stats')
+    loadTemplate('game-1', gameOne),
+    loadTemplate('game-2', gameTwo),
+    loadTemplate('game-3', gameThree),
+    loadTemplate('stats', stats)
   ];
   let current = -1;
 
@@ -51,14 +58,20 @@
 
   document.querySelector('.next').onclick = (e) => {
     e.preventDefault();
-
-    select(current + 1);
+    if (current < slides.length - 1) {
+      select(current + 1);
+    } else {
+      return;
+    }
   };
 
   document.querySelector('.prev').onclick = (e) => {
     e.preventDefault();
-
-    select(current - 1);
+    if (current > 0) {
+      select(current - 1);
+    } else {
+      return;
+    }
   };
 
   select(0);
