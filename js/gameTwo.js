@@ -3,7 +3,6 @@ import {appendToPage} from './appendToPage';
 import {element as gameThreeElement} from './gameThree';
 import {element as gameOneElement} from './gameOne';
 
-
 const template =
     `<div>
       <header class="header">
