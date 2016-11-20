@@ -1,23 +1,14 @@
-import {intro} from './intro';
-import {greeting} from './greeting';
-import {rules} from './rules';
-import {gameOne} from './gameOne';
-import {gameTwo} from './gameTwo';
-import {gameThree} from './gameThree';
-import {stats} from './stats';
+import {element as introElement} from './intro';
+import {element as greetingElement} from './greeting';
+import {element as rulesElement} from './rules';
+import {element as gameOneElement} from './gameOne';
+import {element as gameTwoElement} from './gameTwo';
+import {element as gameThreeElement} from './gameThree';
+import {element as statsElement} from './stats';
 
 (function () {
-  let loadTemplate = (templateElement) => {
-    let node = document.createElement('span');
-    let template = templateElement;
-    let content = template.content ? template.content : template;
-    node.appendChild(content);
-    return node.cloneNode(true);
-  };
-
 
   // Rules
-  let rulesElement = loadTemplate(rules);
   let rulesSubmit = rulesElement.querySelector('.rules__button');
 
   rulesElement.querySelector('.rules__input').oninput = function () {
@@ -40,13 +31,13 @@ import {stats} from './stats';
   mainElement.after(switcher);
 
   let slides = [
-    loadTemplate(intro),
-    loadTemplate(greeting),
+    introElement,
+    greetingElement,
     rulesElement,
-    loadTemplate(gameOne),
-    loadTemplate(gameTwo),
-    loadTemplate(gameThree),
-    loadTemplate(stats)
+    gameOneElement,
+    gameTwoElement,
+    gameThreeElement,
+    statsElement
   ];
   let current = -1;
 
