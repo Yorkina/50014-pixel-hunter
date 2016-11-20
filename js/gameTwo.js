@@ -46,7 +46,7 @@ const template =
           </ul>
         </div>
       </div>
-    </div>`
+    </div>`;
 
 
 const element = compile(template);
