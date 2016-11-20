@@ -1,8 +1,7 @@
 import {compile} from './compile';
 
 const template =
-    `<div>
-      <header class="header">
+    `<header class="header">
         <div class="header__back">
           <span class="back">
             <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -25,8 +24,7 @@ const template =
           <input class="rules__input" type="text" placeholder="Ваше Имя">
           <button class="rules__button  continue" type="submit" disabled>Go!</button>
         </form>
-      </div>
-    </div>`;
+      </div>`;
 
 const element = compile(template);
 
