@@ -1,12 +1,13 @@
-import {element as introElement} from './intro';
-import {element as greetingElement} from './greeting';
-import {element as rulesElement} from './rules';
-import {element as gameOneElement} from './gameOne';
-import {element as gameTwoElement} from './gameTwo';
-import {element as gameThreeElement} from './gameThree';
-import {element as statsElement} from './stats';
+import introElement from './intro';
+import greetingElement from './greeting';
+import rulesElement from './rules';
+import gameOneElement from './gameOne';
+import gameTwoElement from './gameTwo';
+import gameThreeElement from './gameThree';
+import statsElement from './stats';
 
-(function () {
+
+(() => {
 
   // Rules
   let rulesSubmit = rulesElement.querySelector('.rules__button');

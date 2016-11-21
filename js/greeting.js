@@ -1,4 +1,4 @@
-import {compile} from './compile';
+import compile from './compile';
 
 const template =
     `<div class="greeting  central--blur">
@@ -21,6 +21,4 @@ const template =
         </div>
       </div>`;
 
-const element = compile(template);
-
-export {element};
+export default compile(template);

@@ -1,4 +1,4 @@
-import {compile} from './compile';
+import compile from './compile';
 
 const template =
     `<div id="intro" class="intro">
@@ -7,6 +7,4 @@ const template =
         Sparnaay.</p>
     </div>`;
 
-const element = compile(template);
-
-export {element};
+export default compile(template);
