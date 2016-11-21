@@ -1,6 +1,6 @@
-import {compile} from './compile';
+import compile from './compile';
 import {element as introElement} from './intro';
-import {appendToPage} from './appendToPage';
+import appendToPage from './appendToPage';
 
 const template =
     `<header class="header">
@@ -114,10 +114,6 @@ const template =
 
 const element = compile(template);
 const nextBtn = element.querySelector('.back');
-nextBtn.addEventListener('click', nextHandler);
-
-function nextHandler() {
-  appendToPage(introElement);
-}
+nextBtn.addEventListener('click', () => appendToPage(introElement));
 
 export {element};

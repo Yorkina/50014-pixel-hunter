@@ -1,5 +1,5 @@
-import {compile} from './compile';
-import {appendToPage} from './appendToPage';
+import compile from './compile';
+import appendToPage from './appendToPage';
 import {element as gameOneElement} from './gameOne';
 import {element as greetingElement} from './greeting';
 
@@ -34,22 +34,16 @@ const prevBtn = element.querySelector('.back');
 const submitBtn = element.querySelector('.rules__button');
 const rulesInput = element.querySelector('.rules__input');
 
-prevBtn.addEventListener('click', prevHandler);
-submitBtn.addEventListener('click', nextHandler);
-rulesInput.addEventListener('input', toggleInputHandler);
+prevBtn.addEventListener('click', () => appendToPage(greetingElement));
 
-function toggleInputHandler(event) {
-  const isEnabled = !event.target.value;
-  submitBtn.disabled = isEnabled;
-}
-
-function nextHandler(event) {
+submitBtn.addEventListener('click', (event) => {
   event.preventDefault();
   appendToPage(gameOneElement);
-}
+});
 
-function prevHandler(event) {
-  appendToPage(greetingElement);
-}
+rulesInput.addEventListener('input', (event) => {
+  const isEnabled = !event.target.value;
+  submitBtn.disabled = isEnabled;
+});
 
 export {element};

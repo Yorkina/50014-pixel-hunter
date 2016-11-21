@@ -1,5 +1,5 @@
-import {compile} from './compile';
-import {appendToPage} from './appendToPage';
+import compile from './compile';
+import appendToPage from './appendToPage';
 import {element as rulesElement} from './rules';
 
 const template =
@@ -26,10 +26,6 @@ const template =
 const element = compile(template);
 const nextBtn = element.querySelector('.greeting__continue');
 
-nextBtn.addEventListener('click', nextHandler);
-
-function nextHandler() {
-  appendToPage(rulesElement);
-}
+nextBtn.addEventListener('click', () => appendToPage(rulesElement));
 
 export {element};

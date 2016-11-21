@@ -1,5 +1,5 @@
-import {compile} from './compile';
-import {appendToPage} from './appendToPage';
+import compile from './compile';
+import appendToPage from './appendToPage';
 import {element as statsElement} from './stats';
 import {element as gameThreeElement} from './gameThree';
 
@@ -49,18 +49,11 @@ const template =
 
 const element = compile(template);
 const prevBtn = element.querySelector('.back');
-prevBtn.addEventListener('click', prevHandler);
+prevBtn.addEventListener('click', () => appendToPage(gameThreeElement));
 
-let answerBtns = element.querySelectorAll('.game__option');
-answerBtns = Array.from(answerBtns);
-answerBtns.forEach((button) => button.addEventListener('click', nextHandler));
-
-function nextHandler() {
+const answerBtns = Array.from(element.querySelectorAll('.game__option'));
+answerBtns.forEach((button) => button.addEventListener('click', () => {
   appendToPage(statsElement);
-}
-
-function prevHandler() {
-  appendToPage(gameThreeElement);
-}
+}));
 
 export {element};
