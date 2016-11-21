@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import {element as gameTwoElement} from './gameTwo';
-import {element as rulesElement} from './rules';
+import gameTwoElement from './gameTwo';
+import rulesElement from './rules';
 
 const template =
     `<header class="header">
@@ -60,14 +60,14 @@ const template =
         </div>
       </div>`;
 
-const element = compile(template);
-const prevBtn = element.querySelector('.back');
+const gameOneElement = compile(template);
+const prevBtn = gameOneElement.querySelector('.back');
 
-const answerBtns = Array.from(element.querySelectorAll('.game__answer'));
+const answerBtns = Array.from(gameOneElement.querySelectorAll('.game__answer'));
 answerBtns.forEach((button) => button.addEventListener('click', () => {
   appendToPage(gameTwoElement);
 }));
 
 prevBtn.addEventListener('click', () => appendToPage(rulesElement));
 
-export {element};
+export default gameOneElement;

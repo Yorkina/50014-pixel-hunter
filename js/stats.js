@@ -1,5 +1,5 @@
 import compile from './compile';
-import {element as introElement} from './intro';
+import introElement from './intro';
 import appendToPage from './appendToPage';
 
 const template =
@@ -112,8 +112,8 @@ const template =
         </table>
       </div>`;
 
-const element = compile(template);
-const nextBtn = element.querySelector('.back');
+const statsElement = compile(template);
+const nextBtn = statsElement.querySelector('.back');
 nextBtn.addEventListener('click', () => appendToPage(introElement));
 
-export {element};
+export default statsElement;

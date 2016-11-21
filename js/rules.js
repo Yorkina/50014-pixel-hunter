@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import {element as gameOneElement} from './gameOne';
-import {element as greetingElement} from './greeting';
+import gameOneElement from './gameOne';
+import greetingElement from './greeting';
 
 const template =
     `<header class="header">
@@ -29,10 +29,10 @@ const template =
         </form>
       </div>`;
 
-const element = compile(template);
-const prevBtn = element.querySelector('.back');
-const submitBtn = element.querySelector('.rules__button');
-const rulesInput = element.querySelector('.rules__input');
+const rulesElement = compile(template);
+const prevBtn = rulesElement.querySelector('.back');
+const submitBtn = rulesElement.querySelector('.rules__button');
+const rulesInput = rulesElement.querySelector('.rules__input');
 
 prevBtn.addEventListener('click', () => appendToPage(greetingElement));
 
@@ -46,4 +46,4 @@ rulesInput.addEventListener('input', (event) => {
   submitBtn.disabled = isEnabled;
 });
 
-export {element};
+export default rulesElement;

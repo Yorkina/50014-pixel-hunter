@@ -1,6 +1,6 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import {element as rulesElement} from './rules';
+import rulesElement from './rules';
 
 const template =
     `<div class="greeting  central--blur">
@@ -23,9 +23,9 @@ const template =
       </div>
     </div>`;
 
-const element = compile(template);
-const nextBtn = element.querySelector('.greeting__continue');
+const greetingElement = compile(template);
+const nextBtn = greetingElement.querySelector('.greeting__continue');
 
 nextBtn.addEventListener('click', () => appendToPage(rulesElement));
 
-export {element};
+export default greetingElement;

@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import {element as statsElement} from './stats';
-import {element as gameThreeElement} from './gameThree';
+import statsElement from './stats';
+import gameTwoElement from './gameThree';
 
 const template =
     `<header class="header">
@@ -47,13 +47,13 @@ const template =
         </div>
       </div>`;
 
-const element = compile(template);
-const prevBtn = element.querySelector('.back');
-prevBtn.addEventListener('click', () => appendToPage(gameThreeElement));
+const gameThreeElement = compile(template);
+const prevBtn = gameThreeElement.querySelector('.back');
+prevBtn.addEventListener('click', () => appendToPage(gameTwoElement));
 
-const answerBtns = Array.from(element.querySelectorAll('.game__option'));
+const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
 answerBtns.forEach((button) => button.addEventListener('click', () => {
   appendToPage(statsElement);
 }));
 
-export {element};
+export default gameThreeElement;

@@ -1,5 +1,5 @@
 import compile from './compile';
-import {element as greetingElement} from './greeting';
+import greetingElement from './greeting';
 import appendToPage from './appendToPage';
 
 const template =
@@ -9,8 +9,8 @@ const template =
         Sparnaay.</p>
     </div>`;
 
-const element = compile(template);
-const nextBtn = element.querySelector('.intro__asterisk');
+const introElement = compile(template);
+const nextBtn = introElement.querySelector('.intro__asterisk');
 nextBtn.addEventListener('click', () => appendToPage(greetingElement));
 
-export {element};
+export default introElement;
