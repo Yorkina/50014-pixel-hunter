@@ -63,11 +63,11 @@ const template =
 const gameOneElement = compile(template);
 const prevBtn = gameOneElement.querySelector('.back');
 
+prevBtn.addEventListener('click', () => appendToPage(rulesElement));
+
 const answerBtns = Array.from(gameOneElement.querySelectorAll('.game__answer'));
 answerBtns.forEach((button) => button.addEventListener('click', () => {
   appendToPage(gameTwoElement);
 }));
-
-prevBtn.addEventListener('click', () => appendToPage(rulesElement));
 
 export default gameOneElement;

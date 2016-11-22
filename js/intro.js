@@ -11,6 +11,7 @@ const template =
 
 const introElement = compile(template);
 const nextBtn = introElement.querySelector('.intro__asterisk');
+
 nextBtn.addEventListener('click', () => appendToPage(greetingElement));
 
 export default introElement;

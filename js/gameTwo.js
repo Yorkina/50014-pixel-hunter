@@ -51,6 +51,7 @@ const template =
 
 const gameTwoElement = compile(template);
 const prevBtn = gameTwoElement.querySelector('.back');
+
 prevBtn.addEventListener('click', () => appendToPage(gameOneElement));
 
 const answerBtns = Array.from(gameTwoElement.querySelectorAll('.game__answer'));
