@@ -47,6 +47,7 @@ gulp.task('scripts', function () {
          { test: /\.js$/, loader: 'babel-loader'}
         ],
       },
+      devtool: 'inline-source-map',
       output: {
         filename: 'main.js'
       }

@@ -1,4 +1,7 @@
 import compile from './compile';
+import appendToPage from './appendToPage';
+import gameOneElement from './gameOne';
+import greetingElement from './greeting';
 
 const template =
     `<header class="header">
@@ -9,7 +12,7 @@ const template =
           </span>
         </div>
       </header>
-      <div class="rules  central--none">
+      <div class="rules central--none">
         <h1 class="rules__title">Правила</h1>
         <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
           src="img/photo_icon.png" width="16" height="16"> или рисунок <img
@@ -26,4 +29,21 @@ const template =
         </form>
       </div>`;
 
-export default compile(template);
+const rulesElement = compile(template);
+const prevBtn = rulesElement.querySelector('.back');
+const submitBtn = rulesElement.querySelector('.rules__button');
+const rulesInput = rulesElement.querySelector('.rules__input');
+
+prevBtn.addEventListener('click', () => appendToPage(greetingElement));
+
+submitBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  appendToPage(gameOneElement);
+});
+
+rulesInput.addEventListener('input', (event) => {
+  const isEnabled = !event.target.value;
+  submitBtn.disabled = isEnabled;
+});
+
+export default rulesElement;

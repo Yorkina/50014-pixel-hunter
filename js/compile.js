@@ -3,4 +3,3 @@ export default function (htmlString) {
   template.innerHTML = htmlString;
   return template;
 }
-

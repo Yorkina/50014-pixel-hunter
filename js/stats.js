@@ -1,4 +1,6 @@
 import compile from './compile';
+import introElement from './intro';
+import appendToPage from './appendToPage';
 
 const template =
     `<header class="header">
@@ -110,4 +112,8 @@ const template =
         </table>
       </div>`;
 
-export default compile(template);
+const statsElement = compile(template);
+const nextBtn = statsElement.querySelector('.back');
+nextBtn.addEventListener('click', () => appendToPage(introElement));
+
+export default statsElement;
