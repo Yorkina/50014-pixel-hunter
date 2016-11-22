@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
 import statsElement from './stats';
-import gameTwoElement from './gameThree';
+import gameTwoElement from './gameTwo';
 
 const template =
     `<header class="header">
