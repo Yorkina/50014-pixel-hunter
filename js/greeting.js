@@ -3,17 +3,6 @@ import appendToPage from './appendToPage';
 import rulesElement from './rules';
 
 
-const greeting = {
-  challenge: {
-    title: 'Лучшие художники-фотореалисты бросают&nbsp;тебе&nbsp;вызов!',
-    rules: 'Правила игры просты:',
-    firstInstruction: 'Нужно отличить рисунок&nbsp;от фотографии и сделать выбор.',
-    secondInstruction: 'Задача кажется тривиальной, но не думай, что все так просто.',
-    thirdInstruction: 'Фотореализм обманчив и коварен.',
-    fouthInstruction: 'Помни, главное — смотреть очень внимательно.'
-  }
-};
-
 const logo =
   `<div class="greeting__logo">
     <img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter">
@@ -21,13 +10,13 @@ const logo =
 
 const challenge =
   `<div class="greeting__challenge">
-    <h3>${greeting.challenge.title}</h3>
-    <div>${greeting.challenge.rules}</div>
+    <h3>Лучшие художники-фотореалисты бросают&nbsp;тебе&nbsp;вызов!</h3>
+    <div>Правила игры просты:</div>
     <p>
-      ${greeting.challenge.firstInstruction}<br>
-      ${greeting.challenge.secondInstruction}<br>
-      ${greeting.challenge.thirdInstruction}<br>
-      ${greeting.challenge.fouthInstruction}
+      Нужно отличить рисунок&nbsp;от фотографии и сделать выбор.<br>
+      Задача кажется тривиальной, но не думай, что все так просто.<br>
+      Фотореализм обманчив и коварен.<br>
+      Помни, главное — смотреть очень внимательно.
     </p>
   </div>`;
 

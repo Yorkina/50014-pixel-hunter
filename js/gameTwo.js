@@ -17,20 +17,41 @@ const game = {
     'fast',
     'correct',
     'wrong',
-    'unknow',
+    'unknown',
     'slow',
-    'unknow',
+    'unknown',
     'fast',
-    'unknow'
+    'unknown'
   ],
   question: 'Угадай, фото или рисунок?',
-  answers: {
-    photo: 'Фото',
-    picture: 'Рисунок'
-  }
+  answers: [
+    {
+      type: {
+        photo: 'Фото',
+        paint: 'Рисунок'
+      },
+      picture: 'http://placehold.it/705x455',
+      count: 1
+    }
+  ]
 };
 
-const darwHeader = () =>
+const drawLabel = (answer) =>
+  Object.keys(answer.type).map((key) =>
+  `<label class="game__answer game__answer--wide game__answer--${key}">
+    <input name="question${answer.count}" type="radio" value=${key}>
+    <span>${answer.type[key]}</span>
+  </label>`).join('');
+
+const drawAnswers = (answer) =>
+  `<div class="game__option">
+    <img src=${answer.picture} alt="Option ${answer.count}" width="705" height="455">
+    ${drawLabel(answer)}
+  </div>`;
+
+const answersCount = game.answers.map((it) => drawAnswers(it)).join('');
+
+const drawHeader = () =>
     `<header class="header">
       <div class="header__back">
         <span class="back">
@@ -48,45 +69,26 @@ const darwHeader = () =>
 
 const answers =
   `<form class="game__content game__content--wide">
-    <div class="game__option">
-      <img src="http://placehold.it/705x455" alt="Option 1" width="705" height="455">
-      <label class="game__answer game__answer--photo">
-        <input name="question1" type="radio" value="photo">
-        <span>${game.answers.photo}</span>
-      </label>
-      <label class="game__answer game__answer--wide game__answer--paint">
-        <input name="question1" type="radio" value="paint">
-        <span>${game.answers.picture}</span>
-      </label>
-    </div>
+    ${answersCount}
   </form>`;
 
 const stats =
   `<div class="stats">
     <ul class="stats">
     ${game.stats.map((it) =>
-        `<li class="stats__result ${'stats__result' + '--' + (it)}">`
-      ).join('')}</li>
+        `<li class="stats__result stats__result--${it}"></li>`
+      ).join('')}
     </ul>
   </div>`;
-// <li class="stats__result stats__result--wrong"></li>
-//       <li class="stats__result stats__result--slow"></li>
-//       <li class="stats__result stats__result--fast"></li>
-//       <li class="stats__result stats__result--correct"></li>
-//       <li class="stats__result stats__result--wrong"></li>
-//       <li class="stats__result stats__result--unknown"></li>
-//       <li class="stats__result stats__result--slow"></li>
-//       <li class="stats__result stats__result--unknown"></li>
-//       <li class="stats__result stats__result--fast"></li>
-//       <li class="stats__result stats__result--unknown"></li>
 
 const template =
-  `${darwHeader()}
+  `${drawHeader()}
     <div class="game">
       <p class="game__task">${game.question}</p>
       ${answers}
       ${stats}
     </div>`;
+
 
 const gameTwoElement = compile(template);
 const prevBtn = gameTwoElement.querySelector('.back');

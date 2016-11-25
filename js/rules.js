@@ -4,6 +4,10 @@ import gameOneElement from './gameOne';
 import greetingElement from './greeting';
 
 
+const rules = {
+  player_name: 'Иван Федорович Крузенштерн'
+};
+
 const header =
   `<header class="header">
     <div class="header__back">
@@ -13,6 +17,12 @@ const header =
       </span>
     </div>
   </header>`;
+
+const player =
+  `<form class="rules__form">
+    <input class="rules__input" type="text" placeholder="Ваше Имя">
+    <button class="rules__button  continue" type="submit" disabled>Go!</button>
+  </form>`;
 
 const content =
   `<div class="rules central--none">
@@ -26,10 +36,7 @@ const content =
       <br>
       Готовы?
     </p>
-    <form class="rules__form">
-      <input class="rules__input" type="text" placeholder="Ваше Имя">
-      <button class="rules__button  continue" type="submit" disabled>Go!</button>
-    </form>
+    ${player}
   </div>`;
 
 const template =
@@ -47,6 +54,11 @@ submitBtn.addEventListener('click', (event) => {
   event.preventDefault();
   appendToPage(gameOneElement);
 });
+
+if (rules.player_name) {
+  rulesInput.value = rules.player_name;
+  submitBtn.disabled = false;
+}
 
 rulesInput.addEventListener('input', (event) => {
   const isEnabled = !event.target.value;
