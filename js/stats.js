@@ -30,18 +30,16 @@ const statistics = {
         }
       ],
       results: [
-        [
-          'wrong',
-          'slow',
-          'fast',
-          'correct',
-          'wrong',
-          'unknown',
-          'slow',
-          'unknown',
-          'fast',
-          'unknown'
-        ]
+        'wrong',
+        'slow',
+        'fast',
+        'correct',
+        'wrong',
+        'unknown',
+        'slow',
+        'unknown',
+        'fast',
+        'unknown'
       ],
       count: 1,
       cost_point: 100,
@@ -50,24 +48,21 @@ const statistics = {
     },
     {
       results: [
-        [
-          'wrong',
-          'slow',
-          'fast',
-          'correct',
-          'wrong',
-          'unknown',
-          'slow',
-          'unknown',
-          'fast',
-          'unknown'
-        ]
+        'wrong',
+        'slow',
+        'fast',
+        'correct',
+        'wrong',
+        'unknown',
+        'slow',
+        'unknown',
+        'fast',
+        'unknown'
       ],
       count: 2,
       cost_point: 100,
       cost_total: 900,
       result_total: 950
-
     },
     {
       bonuses: [
@@ -80,18 +75,16 @@ const statistics = {
         }
       ],
       results: [
-        [
-          'wrong',
-          'slow',
-          'fast',
-          'correct',
-          'wrong',
-          'unknown',
-          'slow',
-          'wrong',
-          'fast',
-          'wrong'
-        ]
+        'wrong',
+        'slow',
+        'fast',
+        'correct',
+        'wrong',
+        'unknown',
+        'slow',
+        'wrong',
+        'fast',
+        'wrong'
       ],
       count: 3,
       cost_point: 100,
@@ -112,13 +105,6 @@ const header =
     </div>
   </header>`;
 
-const drawStats = (item) =>
-  `<ul class="stats">
-    ${item.map((it) =>
-      `<li class="stats__result stats__result--${it}"></li>`
-    ).join('')}
-  </ul>`;
-
 const drawBonuses = (item) =>
   `<tr>
     <td></td>
@@ -133,12 +119,16 @@ const drawTables = (item) =>
     <tr>
       <td class="result__number">${item.count}.</td>
       <td colspan="2">
-        ${item.results.map((it) => drawStats(it)).join('')}
+        <ul class="stats">
+          ${item.results.map((it) =>
+            `<li class="stats__result stats__result--${it}"></li>`
+          ).join('')}
+        </ul>
       </td>
       <td class="result__points">×&nbsp;${item.cost_point}</td>
       <td class="result__total">${item.cost_total}</td>
     </tr>
-    ${item.bonuses ? item.bonuses.map((it) => drawBonuses(it)).join('') : ''}
+    ${item.bonuses ? item.bonuses.map(drawBonuses).join('') : ''}
     <tr>
       <td colspan="5" class="result__total result__total--final">${item.result_total}</td>
     </tr>
@@ -148,7 +138,7 @@ const template =
     `${header}
       <div class="result">
         <h1>${statistics.title}</h1>
-        ${statistics.total.map((it) => drawTables(it)).join('')}
+        ${statistics.total.map(drawTables).join('')}
       </div>`;
 
 const statsElement = compile(template);

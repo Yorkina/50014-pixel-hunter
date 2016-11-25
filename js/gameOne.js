@@ -26,18 +26,18 @@ const game = {
   question: 'Угадайте для каждого изображения фото или рисунок?',
   answers: [
     {
-      type: {
-        photo: 'Фото',
-        paint: 'Рисунок'
-      },
+      labels: [
+        {type: 'photo', text: 'Фото'},
+        {type: 'paint', text: 'Рисунок'},
+      ],
       picture: 'http://placehold.it/468x458',
       count: 1
     },
     {
-      type: {
-        photo: 'Фото',
-        paint: 'Рисунок'
-      },
+      labels: [
+        {type: 'photo', text: 'Фото'},
+        {type: 'paint', text: 'Рисунок'},
+      ],
       picture: 'http://placehold.it/468x458',
       count: 2
     }
@@ -45,10 +45,10 @@ const game = {
 };
 
 const drawLabel = (answer) =>
-  Object.keys(answer.type).map((key) =>
-  `<label class="game__answer game__answer--${key}">
-    <input name="question${answer.count}" type="radio" value=${key}>
-    <span>${answer.type[key]}</span>
+  answer.labels.map((key) =>
+  `<label class="game__answer game__answer--${key.type}">
+    <input name="question${answer.count}" type="radio" value=${key.type}>
+    <span>${key.text}</span>
   </label>`).join('');
 
 const drawAnswers = (answer) =>
@@ -56,8 +56,6 @@ const drawAnswers = (answer) =>
     <img src=${answer.picture} alt="Option ${answer.count}" width="468" height="458">
     ${drawLabel(answer)}
   </div>`;
-
-const answersCount = game.answers.map((it) => drawAnswers(it)).join('');
 
 const drawHeader = () =>
     `<header class="header">
@@ -77,7 +75,7 @@ const drawHeader = () =>
 
 const answers =
   `<form class="game__content">
-    ${answersCount}
+    ${game.answers.map(drawAnswers).join('')}
   </form>`;
 
 const stats =

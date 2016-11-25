@@ -45,8 +45,6 @@ const drawAnswers = (answer) =>
     <img src=${answer.picture} alt="Option ${answer.count}" width="304" height="455">
   </div>`;
 
-const answersCount = game.answers.map((it) => drawAnswers(it)).join('');
-
 const drawHeader = () =>
     `<header class="header">
       <div class="header__back">
@@ -65,7 +63,7 @@ const drawHeader = () =>
 
 const answers =
   `<form class="game__content game__content--triple">
-    ${answersCount}
+    ${game.answers.map(drawAnswers).join('')}
   </form>`;
 
 const stats =
