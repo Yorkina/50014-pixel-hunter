@@ -6,7 +6,7 @@ import gameOneElement from './gameOne';
 
 const game = {
   timer: 'NN',
-  livesSrc: [
+  lives_src: [
     'img/heart__empty.svg',
     'img/heart__full.svg',
     'img/heart__full.svg'
@@ -61,7 +61,7 @@ const drawHeader = () =>
       </div>
       <h1 class="game__timer">${game.timer}</h1>
       <div class="game__lives">
-        ${game.livesSrc.map((it) =>
+        ${game.lives_src.map((it) =>
           `<img src=${it} class="game__heart" alt="Life" width="32" height="32">`
         ).join('')}
       </div>
