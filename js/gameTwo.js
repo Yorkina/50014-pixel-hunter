@@ -3,51 +3,90 @@ import appendToPage from './appendToPage';
 import gameThreeElement from './gameThree';
 import gameOneElement from './gameOne';
 
-const template =
+
+const game = {
+  timer: 'NN',
+  lives_src: [
+    'img/heart__empty.svg',
+    'img/heart__full.svg',
+    'img/heart__full.svg'
+  ],
+  stats: [
+    'wrong',
+    'slow',
+    'fast',
+    'correct',
+    'wrong',
+    'unknown',
+    'slow',
+    'unknown',
+    'fast',
+    'unknown'
+  ],
+  question: 'Угадай, фото или рисунок?',
+  answers: [
+    {
+      labels: [
+        {type: 'photo', text: 'Фото'},
+        {type: 'paint', text: 'Рисунок'},
+      ],
+      picture: 'http://placehold.it/705x455',
+      count: 1
+    }
+  ]
+};
+
+const drawLabel = (answer) =>
+  answer.labels.map((key) =>
+  `<label class="game__answer game__answer--${key.type}">
+    <input name="question${answer.count}" type="radio" value=${key.type}>
+    <span>${key.text}</span>
+  </label>`).join('');
+
+const drawAnswers = (answer) =>
+  `<div class="game__option">
+    <img src=${answer.picture} alt="Option ${answer.count}" width="705" height="455">
+    ${drawLabel(answer)}
+  </div>`;
+
+const drawHeader = () =>
     `<header class="header">
-        <div class="header__back">
-          <span class="back">
-            <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-            <img src="img/logo_small.png" width="101" height="44">
-          </span>
-        </div>
-        <h1 class="game__timer">NN</h1>
-        <div class="game__lives">
-          <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-          <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-          <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-        </div>
-      </header>
-      <div class="game">
-        <p class="game__task">Угадай, фото или рисунок?</p>
-        <form class="game__content  game__content--wide">
-          <div class="game__option">
-            <img src="http://placehold.it/705x455" alt="Option 1" width="705" height="455">
-            <label class="game__answer  game__answer--photo">
-              <input name="question1" type="radio" value="photo">
-              <span>Фото</span>
-            </label>
-            <label class="game__answer  game__answer--wide  game__answer--paint">
-              <input name="question1" type="radio" value="paint">
-              <span>Рисунок</span>
-            </label>
-          </div>
-        </form>
-        <div class="stats">
-          <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--unknown"></li>
-          </ul>
-        </div>
-      </div>`;
+      <div class="header__back">
+        <span class="back">
+          <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
+          <img src="img/logo_small.png" width="101" height="44">
+        </span>
+      </div>
+      <h1 class="game__timer">${game.timer}</h1>
+      <div class="game__lives">
+        ${game.lives_src.map((it) =>
+          `<img src=${it} class="game__heart" alt="Life" width="32" height="32">`
+        ).join('')}
+      </div>
+    </header>`;
+
+const answers =
+  `<form class="game__content game__content--wide">
+    ${game.answers.map(drawAnswers).join('')}
+  </form>`;
+
+const stats =
+  `<div class="stats">
+    <ul class="stats">
+    ${game.stats.map((it) =>
+        `<li class="stats__result stats__result--${it}"></li>`
+      ).join('')}
+    </ul>
+  </div>`;
+
+const template =
+  `${drawHeader()}
+    <div class="game">
+      <p class="game__task">${game.question}</p>
+      ${answers}
+      ${stats}
+    </div>`;
+
 
 const gameTwoElement = compile(template);
 const prevBtn = gameTwoElement.querySelector('.back');
