@@ -1,5 +1,5 @@
 import compile from './compile';
-import greeting from './greeting';
+import getGreeting from './greeting';
 import appendToPage from './appendToPage';
 
 export default () => {
@@ -14,7 +14,7 @@ export default () => {
   const introElement = compile(template);
   const nextBtn = introElement.querySelector('.intro__asterisk');
 
-  nextBtn.addEventListener('click', () => appendToPage(greeting()));
+  nextBtn.addEventListener('click', () => appendToPage(getGreeting()));
 
   return introElement;
 };

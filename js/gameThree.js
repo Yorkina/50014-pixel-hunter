@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import gameFour from './gameFour';
-import gameTwo from './gameTwo';
+import getGameFour from './gameFour';
+import getGameTwo from './gameTwo';
 
 
 export default (game) => {
@@ -91,11 +91,11 @@ export default (game) => {
   const gameThreeElement = compile(template);
   const prevBtn = gameThreeElement.querySelector('.back');
 
-  prevBtn.addEventListener('click', () => appendToPage(gameTwo()));
+  prevBtn.addEventListener('click', () => appendToPage(getGameTwo()));
 
   const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(gameFour(data));
+    appendToPage(getGameFour(data));
   }));
 
   return gameThreeElement;

@@ -1,6 +1,6 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import rules from './rules';
+import getRules from './rules';
 
 
 export default () => {
@@ -43,7 +43,7 @@ export default () => {
   const greetingElement = compile(template);
   const nextBtn = greetingElement.querySelector('.greeting__continue');
 
-  nextBtn.addEventListener('click', () => appendToPage(rules(data)));
+  nextBtn.addEventListener('click', () => appendToPage(getRules(data)));
 
   return greetingElement;
 };

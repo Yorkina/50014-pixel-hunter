@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import gameOne from './gameOne';
-import greeting from './greeting';
+import getGameOne from './gameOne';
+import getGreeting from './greeting';
 
 
 export default (rules) => {
@@ -85,11 +85,11 @@ export default (rules) => {
   const submitBtn = rulesElement.querySelector('.rules__button');
   const rulesInput = rulesElement.querySelector('.rules__input');
 
-  prevBtn.addEventListener('click', () => appendToPage(greeting()));
+  prevBtn.addEventListener('click', () => appendToPage(getGreeting()));
 
   submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    appendToPage(gameOne(data));
+    appendToPage(getGameOne(data));
   });
 
   if (rules.player_name) {

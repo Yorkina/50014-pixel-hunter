@@ -1,5 +1,5 @@
 import compile from './compile';
-import intro from './intro';
+import getIntro from './intro';
 import appendToPage from './appendToPage';
 
 
@@ -52,7 +52,7 @@ export default (statistics) => {
 
   const statsElement = compile(template);
   const nextBtn = statsElement.querySelector('.back');
-  nextBtn.addEventListener('click', () => appendToPage(intro()));
+  nextBtn.addEventListener('click', () => appendToPage(getIntro()));
 
   return statsElement;
 };
