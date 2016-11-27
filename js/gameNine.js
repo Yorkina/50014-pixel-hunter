@@ -91,7 +91,7 @@ export default (game) => {
   const gameNineElement = compile(template);
   const prevBtn = gameNineElement.querySelector('.back');
 
-  prevBtn.addEventListener('click', () => appendToPage(gameTwo()));
+  prevBtn.addEventListener('click', () => appendToPage(gameEight()));
 
   const answerBtns = Array.from(gameNineElement.querySelectorAll('.game__option'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
