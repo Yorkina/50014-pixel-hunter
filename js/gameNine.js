@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import gameFour from './gameFour';
-import gameTwo from './gameTwo';
+import gameTen from './gameTen';
+import gameEight from './gameEight';
 
 
 export default (game) => {
@@ -24,7 +24,7 @@ export default (game) => {
       'fast',
       'unknown'
     ],
-    question: 'Угадайте для каждого изображения фото или рисунок?',
+    question: 'Как ты думаешь, эти изображения фото или рисунок?',
     answers: [
       {
         labels: [
@@ -71,7 +71,7 @@ export default (game) => {
       ${game.answers.map(drawAnswers).join('')}
     </form>`;
 
-  const stats =
+  const statistics =
     `<div class="stats">
       <ul class="stats">
       ${game.stats.map((it) =>
@@ -85,19 +85,19 @@ export default (game) => {
       <div class="game">
         <p class="game__task">${game.question}</p>
         ${answers}
-        ${stats}
+        ${statistics}
       </div>`;
 
-  const gameThreeElement = compile(template);
-  const prevBtn = gameThreeElement.querySelector('.back');
+  const gameNineElement = compile(template);
+  const prevBtn = gameNineElement.querySelector('.back');
 
   prevBtn.addEventListener('click', () => appendToPage(gameTwo()));
 
-  const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
+  const answerBtns = Array.from(gameNineElement.querySelectorAll('.game__option'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(gameFour(data));
+    appendToPage(gameTen(data));
   }));
 
-  return gameThreeElement;
+  return gameNineElement;
 };
 

@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
 import gameFour from './gameFour';
-import gameTwo from './gameTwo';
+import gameSix from './gameSix';
 
 
 export default (game) => {
@@ -24,30 +24,33 @@ export default (game) => {
       'fast',
       'unknown'
     ],
-    question: 'Угадайте для каждого изображения фото или рисунок?',
+    question: 'Найдите рисунок среди этих изображений',
     answers: [
       {
-        labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
-        ],
-        picture: 'http://placehold.it/468x458',
+        picture: 'http://placehold.it/304x455',
         count: 1
       },
       {
-        labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
-        ],
-        picture: 'http://placehold.it/468x458',
+        picture: 'http://placehold.it/304x455',
         count: 2
+      },
+      {
+        picture: 'http://placehold.it/304x455',
+        count: 3
       }
     ]
   };
+  const drawLabel = (answer) =>
+    answer.labels.map((key) =>
+    `<label class="game__answer game__answer--${key.type}">
+      <input name="question${answer.count}" type="radio" value=${key.type}>
+      <span>${key.text}</span>
+    </label>`).join('');
 
   const drawAnswers = (answer) =>
     `<div class="game__option">
-      <img src=${answer.picture} alt="Option ${answer.count}" width="304" height="455">
+      <img src=${answer.picture} alt="Option ${answer.count}" width="705" height="455">
+      ${drawLabel(answer)}
     </div>`;
 
   const drawHeader = () =>
@@ -67,7 +70,7 @@ export default (game) => {
       </header>`;
 
   const answers =
-    `<form class="game__content game__content--triple">
+    `<form class="game__content game__content--wide">
       ${game.answers.map(drawAnswers).join('')}
     </form>`;
 
@@ -75,8 +78,8 @@ export default (game) => {
     `<div class="stats">
       <ul class="stats">
       ${game.stats.map((it) =>
-        `<li class="stats__result stats__result--${it}"></li>`
-      ).join('')}
+          `<li class="stats__result stats__result--${it}"></li>`
+        ).join('')}
       </ul>
     </div>`;
 
@@ -88,16 +91,17 @@ export default (game) => {
         ${stats}
       </div>`;
 
-  const gameThreeElement = compile(template);
-  const prevBtn = gameThreeElement.querySelector('.back');
 
-  prevBtn.addEventListener('click', () => appendToPage(gameTwo()));
+  const gameFiveElement = compile(template);
+  const prevBtn = gameFiveElement.querySelector('.back');
 
-  const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
+  prevBtn.addEventListener('click', () => appendToPage(gameFour()));
+
+  const answerBtns = Array.from(gameFiveElement.querySelectorAll('.game__answer'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(gameFour(data));
+    appendToPage(gameSix(data));
   }));
 
-  return gameThreeElement;
+  return gameFiveElement;
 };
 

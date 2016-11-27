@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import gameFour from './gameFour';
-import gameTwo from './gameTwo';
+import gameFive from './gameFive';
+import gameSeven from './gameSeven';
 
 
 export default (game) => {
@@ -24,7 +24,7 @@ export default (game) => {
       'fast',
       'unknown'
     ],
-    question: 'Угадайте для каждого изображения фото или рисунок?',
+    question: 'Выбери из вариантов фото это или рисунок?',
     answers: [
       {
         labels: [
@@ -88,16 +88,16 @@ export default (game) => {
         ${stats}
       </div>`;
 
-  const gameThreeElement = compile(template);
-  const prevBtn = gameThreeElement.querySelector('.back');
+  const gameSixElement = compile(template);
+  const prevBtn = gameSixElement.querySelector('.back');
 
   prevBtn.addEventListener('click', () => appendToPage(gameTwo()));
 
-  const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
+  const answerBtns = Array.from(gameSixElement.querySelectorAll('.game__option'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(gameFour(data));
+    appendToPage(gameSeven(data));
   }));
 
-  return gameThreeElement;
+  return gameSixElement;
 };
 

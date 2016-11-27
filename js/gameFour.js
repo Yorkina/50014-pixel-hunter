@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import gameFour from './gameFour';
-import gameTwo from './gameTwo';
+import gameThree from './gameThree';
+import gameFive from './gameFive';
 
 
 export default (game) => {
@@ -24,30 +24,30 @@ export default (game) => {
       'fast',
       'unknown'
     ],
-    question: 'Угадайте для каждого изображения фото или рисунок?',
+    question: 'Угадай, это фото перед тобой или рисунок?',
     answers: [
       {
         labels: [
           {type: 'photo', text: 'Фото'},
           {type: 'paint', text: 'Рисунок'},
         ],
-        picture: 'http://placehold.it/468x458',
+        picture: 'http://placehold.it/705x455',
         count: 1
-      },
-      {
-        labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
-        ],
-        picture: 'http://placehold.it/468x458',
-        count: 2
       }
     ]
   };
 
+  const drawLabel = (answer) =>
+    answer.labels.map((key) =>
+    `<label class="game__answer game__answer--${key.type}">
+      <input name="question${answer.count}" type="radio" value=${key.type}>
+      <span>${key.text}</span>
+    </label>`).join('');
+
   const drawAnswers = (answer) =>
     `<div class="game__option">
-      <img src=${answer.picture} alt="Option ${answer.count}" width="304" height="455">
+      <img src=${answer.picture} alt="Option ${answer.count}" width="468" height="458">
+      ${drawLabel(answer)}
     </div>`;
 
   const drawHeader = () =>
@@ -67,7 +67,7 @@ export default (game) => {
       </header>`;
 
   const answers =
-    `<form class="game__content game__content--triple">
+    `<form class="game__content">
       ${game.answers.map(drawAnswers).join('')}
     </form>`;
 
@@ -88,16 +88,16 @@ export default (game) => {
         ${stats}
       </div>`;
 
-  const gameThreeElement = compile(template);
-  const prevBtn = gameThreeElement.querySelector('.back');
+  const gameFourElement = compile(template);
+  const prevBtn = gameFourElement.querySelector('.back');
 
-  prevBtn.addEventListener('click', () => appendToPage(gameTwo()));
+  prevBtn.addEventListener('click', () => appendToPage(gameThree()));
 
-  const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
+  const answerBtns = Array.from(gameFourElement.querySelectorAll('.game__answer'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(gameFour(data));
+    appendToPage(gameFive(data));
   }));
 
-  return gameThreeElement;
+  return gameFourElement;
 };
 

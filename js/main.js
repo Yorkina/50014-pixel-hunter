@@ -1,4 +1,4 @@
-import introElement from './intro';
+import intro from './intro';
 import appendToPage from './appendToPage';
 
-appendToPage(introElement);
+appendToPage(intro());
