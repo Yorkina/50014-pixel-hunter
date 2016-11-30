@@ -1,49 +1,10 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import getGameOne from './gameOne';
+import games from './games';
 import getGreeting from './greeting';
 
 
 export default (rules) => {
-  const data = {
-    timer: 'NN',
-    lives_src: [
-      'img/heart__empty.svg',
-      'img/heart__full.svg',
-      'img/heart__full.svg'
-    ],
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
-    question: 'Угадайте для каждого изображения фото или рисунок?',
-    answers: [
-      {
-        labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
-        ],
-        picture: 'http://placehold.it/468x458',
-        count: 1
-      },
-      {
-        labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
-        ],
-        picture: 'http://placehold.it/468x458',
-        count: 2
-      }
-    ]
-  };
 
   const header =
     `<header class="header">
@@ -85,17 +46,17 @@ export default (rules) => {
   const submitBtn = rulesElement.querySelector('.rules__button');
   const rulesInput = rulesElement.querySelector('.rules__input');
 
-  prevBtn.addEventListener('click', () => appendToPage(getGreeting()));
-
-  submitBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    appendToPage(getGameOne(data));
-  });
-
   if (rules.player_name) {
     rulesInput.value = rules.player_name;
     submitBtn.disabled = false;
   }
+
+  prevBtn.addEventListener('click', () => appendToPage(getGreeting()));
+
+  submitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    appendToPage(games());
+  });
 
   rulesInput.addEventListener('input', (event) => {
     const isEnabled = !event.target.value;

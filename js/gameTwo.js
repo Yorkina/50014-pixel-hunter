@@ -1,45 +1,11 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import getGameThree from './gameThree';
+import games from './games';
 import getGameOne from './gameOne';
 
 
 export default (game) => {
-  const data = {
-    timer: 'NN',
-    lives_src: [
-      'img/heart__empty.svg',
-      'img/heart__full.svg',
-      'img/heart__full.svg'
-    ],
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
-    question: 'Найдите рисунок среди изображений',
-    answers: [
-      {
-        picture: 'http://placehold.it/304x455',
-        count: 1
-      },
-      {
-        picture: 'http://placehold.it/304x455',
-        count: 2
-      },
-      {
-        picture: 'http://placehold.it/304x455',
-        count: 3
-      }
-    ]
-  };
+
   const drawLabel = (answer) =>
     answer.labels.map((key) =>
     `<label class="game__answer game__answer--${key.type}">
@@ -49,28 +15,40 @@ export default (game) => {
 
   const drawAnswers = (answer) =>
     `<div class="game__option">
-      <img src=${answer.picture} alt="Option ${answer.count}" width="705" height="455">
-      ${drawLabel(answer)}
+      <img src=${answer.picture} alt="Option ${answer.count}">
+      ${answer.labels ? drawLabel(answer) : ''}
     </div>`;
 
+  const drawLives = (lives) => {
+    let images = '';
+    for (let i = 0; i < 3; i++) {
+      if (i < lives) {
+        images += `<img src="img/heart__full.svg"
+          class="game__heart" alt="Life" width="32" height="32">`;
+      } else {
+        images += `<img src="img/heart__empty.svg"
+          class="game__heart" alt="Life" width="32" height="32">`;
+      }
+    }
+    return images;
+  };
+
   const drawHeader = () =>
-      `<header class="header">
-        <div class="header__back">
-          <span class="back">
-            <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-            <img src="img/logo_small.png" width="101" height="44">
-          </span>
-        </div>
-        <h1 class="game__timer">${game.timer}</h1>
-        <div class="game__lives">
-          ${game.lives_src.map((it) =>
-            `<img src=${it} class="game__heart" alt="Life" width="32" height="32">`
-          ).join('')}
-        </div>
-      </header>`;
+    `<header class="header header2">
+      <div class="header__back">
+        <span class="back">
+          <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
+          <img src="img/logo_small.png" width="101" height="44">
+        </span>
+      </div>
+      <h1 class="game__timer">NN</h1>
+      <div class="game__lives">
+        ${drawLives(3)}
+      </div>
+    </header>`;
 
   const answers =
-    `<form class="game__content game__content--wide">
+    `<form class="game__content">
       ${game.answers.map(drawAnswers).join('')}
     </form>`;
 
@@ -96,10 +74,16 @@ export default (game) => {
   const prevBtn = gameTwoElement.querySelector('.back');
 
   prevBtn.addEventListener('click', () => appendToPage(getGameOne()));
-
-  const answerBtns = Array.from(gameTwoElement.querySelectorAll('.game__answer'));
-  answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(getGameThree(data));
+  let values = [];
+  const answerBtns = Array.from(gameTwoElement.querySelectorAll('.game__answer input'));
+  answerBtns.forEach((button) => button.addEventListener('click', (evt) => {
+    if (values.length < 1) {
+      values.push({name: evt.target.name, type: evt.target.value});
+      return;
+    } else if (values.length === 1) {
+      values.push({name: evt.target.name, type: evt.target.value});
+      appendToPage(games());
+    }
   }));
 
   return gameTwoElement;
