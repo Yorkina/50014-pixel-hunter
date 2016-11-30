@@ -3,7 +3,7 @@ import appendToPage from './appendToPage';
 import getRules from './rules';
 import getNextQuestion from './games';
 import getStats from './stats';
-import data from './data/statsData';
+import data from './dataInfo/statsData';
 
 
 export default (game) => {

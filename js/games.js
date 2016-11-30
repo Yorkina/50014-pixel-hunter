@@ -1,7 +1,7 @@
 import getGameOne from './gameOne';
 import getGameTwo from './gameTwo';
 import getGameThree from './gameThree';
-import game from './data/gameData';
+import game from './dataInfo/gameData';
 
 let currentQuestionNum = 0;
 
