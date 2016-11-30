@@ -6,6 +6,19 @@ import getGameOne from './gameOne';
 
 export default (game) => {
 
+  let statics = [
+    'wrong',
+    'slow',
+    'fast',
+    'correct',
+    'wrong',
+    'unknown',
+    'slow',
+    'unknown',
+    'fast',
+    'unknown'
+  ];
+
   const drawLabel = (answer) =>
     answer.labels.map((key) =>
     `<label class="game__answer game__answer--${key.type}">
@@ -55,7 +68,7 @@ export default (game) => {
   const stats =
     `<div class="stats">
       <ul class="stats">
-      ${game.stats.map((it) =>
+      ${statics.map((it) =>
           `<li class="stats__result stats__result--${it}"></li>`
         ).join('')}
       </ul>

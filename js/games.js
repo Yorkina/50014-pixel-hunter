@@ -7,18 +7,6 @@ import getGameLast from './gameLast';
 const game = [
   {
     id: 'level0',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадай, фото или рисунок?',
     answers: [
       {
@@ -33,18 +21,6 @@ const game = [
   },
   {
     id: 'level1',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадайте для каждого изображения фото или рисунок?',
     answers: [
       {
@@ -67,18 +43,6 @@ const game = [
   },
   {
     id: 'level2',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Найдите рисунок среди изображений',
     answers: [
       {
@@ -97,18 +61,6 @@ const game = [
   },
   {
     id: 'level3',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадай, фото или рисунок?',
     answers: [
       {
@@ -123,18 +75,6 @@ const game = [
   },
   {
     id: 'level4',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадайте для каждого изображения фото или рисунок?',
     answers: [
       {
@@ -157,18 +97,6 @@ const game = [
   },
   {
     id: 'level5',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Найдите рисунок среди изображений',
     answers: [
       {
@@ -187,18 +115,6 @@ const game = [
   },
   {
     id: 'level6',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадай, фото или рисунок?',
     answers: [
       {
@@ -213,18 +129,6 @@ const game = [
   },
   {
     id: 'level7',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадайте для каждого изображения фото или рисунок?',
     answers: [
       {
@@ -247,18 +151,6 @@ const game = [
   },
   {
     id: 'level8',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Найдите рисунок среди изображений',
     answers: [
       {
@@ -277,18 +169,6 @@ const game = [
   },
   {
     id: 'level9',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадай, фото или рисунок?',
     answers: [
       {
@@ -303,18 +183,6 @@ const game = [
   },
   {
     id: 'level10',
-    stats: [
-      'wrong',
-      'slow',
-      'fast',
-      'correct',
-      'wrong',
-      'unknown',
-      'slow',
-      'unknown',
-      'fast',
-      'unknown'
-    ],
     question: 'Угадайте для каждого изображения фото или рисунок?',
     answers: [
       {

@@ -6,6 +6,19 @@ import games from './games';
 
 export default (game) => {
 
+  let statics = [
+    'wrong',
+    'slow',
+    'fast',
+    'correct',
+    'wrong',
+    'unknown',
+    'slow',
+    'unknown',
+    'fast',
+    'unknown'
+  ];
+
   const drawAnswers = (answer) =>
     `<div class="game__option">
       <img src=${answer.picture} alt="Option ${answer.count}" >
@@ -47,7 +60,7 @@ export default (game) => {
   const stats =
     `<div class="stats">
       <ul class="stats">
-      ${game.stats.map((it) =>
+      ${statics.map((it) =>
         `<li class="stats__result stats__result--${it}"></li>`
       ).join('')}
       </ul>
