@@ -28,3 +28,8 @@ body {
 a {
   color: $main-font-color;
 }
+
+span {
+  pointer-events: none;
+}
+

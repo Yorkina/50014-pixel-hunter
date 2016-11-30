@@ -1,17 +1,12 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import statsElement from './stats';
-import gameTwoElement from './gameTwo';
+import getGameTwo from './gameTwo';
+import getNextQuestion from './games';
 
 
-const game = {
-  timer: 'NN',
-  lives_src: [
-    'img/heart__empty.svg',
-    'img/heart__full.svg',
-    'img/heart__full.svg'
-  ],
-  stats: [
+export default (game) => {
+
+  let statics = [
     'wrong',
     'slow',
     'fast',
@@ -22,75 +17,73 @@ const game = {
     'unknown',
     'fast',
     'unknown'
-  ],
-  question: 'Найдите рисунок среди изображений',
-  answers: [
-    {
-      picture: 'http://placehold.it/304x455',
-      count: 1
-    },
-    {
-      picture: 'http://placehold.it/304x455',
-      count: 2
-    },
-    {
-      picture: 'http://placehold.it/304x455',
-      count: 3
+  ];
+
+  const drawAnswers = (answer) =>
+    `<div class="game__option">
+      <img src=${answer.picture} alt="Option ${answer.count}" >
+    </div>`;
+
+  const drawLives = (lives) => {
+    let images = '';
+    for (let i = 0; i < 3; i++) {
+      if (i < lives) {
+        images += `<img src="img/heart__full.svg"
+          class="game__heart" alt="Life" width="32" height="32">`;
+      } else {
+        images += `<img src="img/heart__empty.svg"
+          class="game__heart" alt="Life" width="32" height="32">`;
+      }
     }
-  ]
-};
+    return images;
+  };
 
-const drawAnswers = (answer) =>
-  `<div class="game__option">
-    <img src=${answer.picture} alt="Option ${answer.count}" width="304" height="455">
-  </div>`;
-
-const drawHeader = () =>
-    `<header class="header">
+  const drawHeader = () =>
+    `<header class="header header3">
       <div class="header__back">
         <span class="back">
           <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
           <img src="img/logo_small.png" width="101" height="44">
         </span>
       </div>
-      <h1 class="game__timer">${game.timer}</h1>
+      <h1 class="game__timer">NN</h1>
       <div class="game__lives">
-        ${game.lives_src.map((it) =>
-          `<img src=${it} class="game__heart" alt="Life" width="32" height="32">`
-        ).join('')}
+        ${drawLives(3)}
       </div>
     </header>`;
 
-const answers =
-  `<form class="game__content game__content--triple">
-    ${game.answers.map(drawAnswers).join('')}
-  </form>`;
+  const answers =
+    `<form class="game__content game__content--triple">
+      ${game.answers.map(drawAnswers).join('')}
+    </form>`;
 
-const stats =
-  `<div class="stats">
-    <ul class="stats">
-    ${game.stats.map((it) =>
-      `<li class="stats__result stats__result--${it}"></li>`
-    ).join('')}
-    </ul>
-  </div>`;
-
-const template =
-  `${drawHeader()}
-    <div class="game">
-      <p class="game__task">${game.question}</p>
-      ${answers}
-      ${stats}
+  const stats =
+    `<div class="stats">
+      <ul class="stats">
+      ${statics.map((it) =>
+        `<li class="stats__result stats__result--${it}"></li>`
+      ).join('')}
+      </ul>
     </div>`;
 
-const gameThreeElement = compile(template);
-const prevBtn = gameThreeElement.querySelector('.back');
+  const template =
+    `${drawHeader()}
+      <div class="game">
+        <p class="game__task">${game.question}</p>
+        ${answers}
+        ${stats}
+      </div>`;
 
-prevBtn.addEventListener('click', () => appendToPage(gameTwoElement));
+  const gameThreeElement = compile(template);
+  const prevBtn = gameThreeElement.querySelector('.back');
 
-const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
-answerBtns.forEach((button) => button.addEventListener('click', () => {
-  appendToPage(statsElement);
-}));
+  prevBtn.addEventListener('click', () => appendToPage(getGameTwo()));
 
-export default gameThreeElement;
+  const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
+  answerBtns.forEach((button) => button.addEventListener('click', () => {
+    appendToPage(getNextQuestion());
+  }));
+
+  return gameThreeElement;
+};
+
