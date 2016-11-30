@@ -1,7 +1,7 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
 import getGameTwo from './gameTwo';
-import games from './games';
+import getNextQuestion from './games';
 
 
 export default (game) => {
@@ -81,7 +81,7 @@ export default (game) => {
 
   const answerBtns = Array.from(gameThreeElement.querySelectorAll('.game__option'));
   answerBtns.forEach((button) => button.addEventListener('click', () => {
-    appendToPage(games());
+    appendToPage(getNextQuestion());
   }));
 
   return gameThreeElement;

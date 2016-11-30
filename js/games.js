@@ -1,7 +1,6 @@
 import getGameOne from './gameOne';
 import getGameTwo from './gameTwo';
 import getGameThree from './gameThree';
-import getGameLast from './gameLast';
 
 
 const game = [
@@ -216,6 +215,7 @@ export default () => {
       case 'level0':
       case 'level3':
       case 'level6':
+      case 'level9':
         element = getGameOne(data);
         break;
       case 'level1':
@@ -227,9 +227,6 @@ export default () => {
       case 'level5':
       case 'level8':
         element = getGameThree(data);
-        break;
-      case 'level9':
-        element = getGameLast(data);
         break;
     }
 

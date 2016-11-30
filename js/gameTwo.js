@@ -1,6 +1,6 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
-import games from './games';
+import getNextQuestion from './games';
 import getGameOne from './gameOne';
 
 
@@ -95,7 +95,7 @@ export default (game) => {
       return;
     } else if (values.length === 1) {
       values.push({name: evt.target.name, type: evt.target.value});
-      appendToPage(games());
+      appendToPage(getNextQuestion());
     }
   }));
 
