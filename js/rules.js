@@ -4,7 +4,7 @@ import games from './games';
 import getGreeting from './greeting';
 
 
-export default (rules) => {
+export default () => {
 
   const header =
     `<header class="header">
@@ -45,11 +45,6 @@ export default (rules) => {
   const prevBtn = rulesElement.querySelector('.back');
   const submitBtn = rulesElement.querySelector('.rules__button');
   const rulesInput = rulesElement.querySelector('.rules__input');
-
-  if (rules.player_name) {
-    rulesInput.value = rules.player_name;
-    submitBtn.disabled = false;
-  }
 
   prevBtn.addEventListener('click', () => appendToPage(getGreeting()));
 

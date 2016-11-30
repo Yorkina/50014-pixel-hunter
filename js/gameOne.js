@@ -3,100 +3,10 @@ import appendToPage from './appendToPage';
 import getRules from './rules';
 import getNextQuestion from './games';
 import getStats from './stats';
+import data from './data/statsData';
 
 
 export default (game) => {
-  const data = {
-    total: [
-      {
-        bonuses: [
-          {
-            title: 'Бонус за скорость:',
-            extra: 1,
-            points: 50,
-            total: 50,
-            type: 'fast'
-          },
-          {
-            title: 'Бонус за жизни:',
-            extra: 2,
-            points: 50,
-            total: 100,
-            type: 'heart'
-          },
-          {
-            title: 'Штраф за медлительность:',
-            extra: 2,
-            points: 50,
-            total: -100,
-            type: 'slow'
-          }
-        ],
-        results: [
-          'wrong',
-          'slow',
-          'fast',
-          'correct',
-          'wrong',
-          'unknown',
-          'slow',
-          'unknown',
-          'fast',
-          'unknown'
-        ],
-        count: 1,
-        cost_point: 100,
-        cost_total: 900,
-        result_total: 950
-      },
-      {
-        results: [
-          'wrong',
-          'slow',
-          'fast',
-          'correct',
-          'wrong',
-          'unknown',
-          'slow',
-          'unknown',
-          'fast',
-          'unknown'
-        ],
-        count: 2,
-        cost_point: 100,
-        cost_total: 900,
-        result_total: 950
-      },
-      {
-        bonuses: [
-          {
-            title: 'Бонус за скорость:',
-            extra: 2,
-            points: 50,
-            total: 50,
-            type: 'fast'
-          }
-        ],
-        results: [
-          'wrong',
-          'slow',
-          'fast',
-          'correct',
-          'wrong',
-          'unknown',
-          'slow',
-          'wrong',
-          'fast',
-          'wrong'
-        ],
-        count: 3,
-        cost_point: 100,
-        cost_total: 900,
-        result_total: 950
-      }
-    ],
-    title: 'Победа!'
-  };
 
   let statics = [
     'wrong',
@@ -110,6 +20,10 @@ export default (game) => {
     'fast',
     'unknown'
   ];
+
+  let defaultLives = {
+    count: 3
+  };
 
   const drawLabel = (answer) =>
     answer.labels.map((key) =>
@@ -125,17 +39,12 @@ export default (game) => {
     </div>`;
 
   const drawLives = (lives) => {
-    let images = '';
-    for (let i = 0; i < 3; i++) {
-      if (i < lives) {
-        images += `<img src="img/heart__full.svg"
-          class="game__heart" alt="Life" width="32" height="32">`;
-      } else {
-        images += `<img src="img/heart__empty.svg"
-          class="game__heart" alt="Life" width="32" height="32">`;
-      }
-    }
-    return images;
+    const diff = defaultLives.count - lives;
+    let livesArray = Array.from(Array(defaultLives.count));
+
+    return livesArray.map((life, i) => `
+      <img src="img/heart__${i < diff ? 'empty' : 'full'}.svg"
+      class="game__heart" alt="Life" width="32" height="32">`);
   };
 
   const drawHeader = () =>
@@ -148,7 +57,7 @@ export default (game) => {
       </div>
       <h1 class="game__timer">NN</h1>
       <div class="game__lives">
-        ${drawLives(2)}
+        ${drawLives(2).join('')}
       </div>
     </header>`;
 
