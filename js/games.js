@@ -214,29 +214,17 @@ export default () => {
     switch (data.id) {
 
       case 'level0':
-        element = getGameOne(data);
-        break;
-      case 'level1':
-        element = getGameTwo(data);
-        break;
-      case 'level2':
-        element = getGameThree(data);
-        break;
       case 'level3':
-        element = getGameOne(data);
-        break;
-      case 'level4':
-        element = getGameTwo(data);
-        break;
-      case 'level5':
-        element = getGameThree(data);
-        break;
       case 'level6':
         element = getGameOne(data);
         break;
+      case 'level1':
+      case 'level4':
       case 'level7':
         element = getGameTwo(data);
         break;
+      case 'level2':
+      case 'level5':
       case 'level8':
         element = getGameThree(data);
         break;
