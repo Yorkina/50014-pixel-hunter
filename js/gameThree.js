@@ -30,7 +30,7 @@ export default (game) => {
 
   const drawLives = (lives) => {
     const diff = defaultLives.count - lives;
-    let livesArray = Array.from(Array(defaultLives.count));
+    let livesArray = Array.from([...Array(defaultLives.count)]);
 
     return livesArray.map((life, i) => `
       <img src="img/heart__${i < diff ? 'empty' : 'full'}.svg"
