@@ -19,23 +19,22 @@ export default (game) => {
     'unknown'
   ];
 
+  let defaultLives = {
+    count: 3
+  };
+
   const drawAnswers = (answer) =>
     `<div class="game__option">
       <img src=${answer.picture} alt="Option ${answer.count}" >
     </div>`;
 
   const drawLives = (lives) => {
-    let images = '';
-    for (let i = 0; i < 3; i++) {
-      if (i < lives) {
-        images += `<img src="img/heart__full.svg"
-          class="game__heart" alt="Life" width="32" height="32">`;
-      } else {
-        images += `<img src="img/heart__empty.svg"
-          class="game__heart" alt="Life" width="32" height="32">`;
-      }
-    }
-    return images;
+    const diff = defaultLives.count - lives;
+    let livesArray = Array.from([...Array(defaultLives.count)]);
+
+    return livesArray.map((life, i) => `
+      <img src="img/heart__${i < diff ? 'empty' : 'full'}.svg"
+      class="game__heart" alt="Life" width="32" height="32">`);
   };
 
   const drawHeader = () =>
@@ -48,7 +47,7 @@ export default (game) => {
       </div>
       <h1 class="game__timer">NN</h1>
       <div class="game__lives">
-        ${drawLives(3)}
+        ${drawLives(3).join('')}
       </div>
     </header>`;
 

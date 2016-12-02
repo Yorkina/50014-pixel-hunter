@@ -4,9 +4,6 @@ import getRules from './rules';
 
 
 export default () => {
-  const data = {
-    player_name: 'Иван Федорович Крузенштерн'
-  };
 
   const logo =
     `<div class="greeting__logo">
@@ -43,7 +40,7 @@ export default () => {
   const greetingElement = compile(template);
   const nextBtn = greetingElement.querySelector('.greeting__continue');
 
-  nextBtn.addEventListener('click', () => appendToPage(getRules(data)));
+  nextBtn.addEventListener('click', () => appendToPage(getRules()));
 
   return greetingElement;
 };
