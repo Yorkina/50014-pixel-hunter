@@ -1,32 +1,18 @@
 import compile from './compile';
 import appendToPage from './appendToPage';
 import getNextQuestion from './games';
-import getGameOne from './gameOne';
+import timer from './helpers/timer';
+import drawHeader from './templates/header';
+import stats from './templates/stats';
+import live from './helpers/live';
+import verdict from './dataInfo/verdict';
 
 
-export default (game) => {
-
-  let statics = [
-    'wrong',
-    'slow',
-    'fast',
-    'correct',
-    'wrong',
-    'unknown',
-    'slow',
-    'unknown',
-    'fast',
-    'unknown'
-  ];
-
-  let defaultLives = {
-    count: 3
-  };
-
+export default (game, stat) => {
   const drawLabel = (answer) =>
-    answer.labels.map((key) =>
+    answer.labels.map((key, i) =>
     `<label class="game__answer game__answer--${key.type}">
-      <input name="question${answer.count}" type="radio" value=${key.type}>
+      <input name="question${answer.count}" type="radio" value=${key.type} data-answer=${answer.count}>
       <span>${key.text}</span>
     </label>`).join('');
 
@@ -36,68 +22,82 @@ export default (game) => {
       ${answer.labels ? drawLabel(answer) : ''}
     </div>`;
 
-  const drawLives = (lives) => {
-    const diff = defaultLives.count - lives;
-    let livesArray = Array.from([...Array(defaultLives.count)]);
-
-    return livesArray.map((life, i) =>
-      `<img src="img/heart__${i < diff ? 'empty' : 'full'}.svg"
-      class="game__heart" alt="Life" width="32" height="32">`);
-  };
-
-  const drawHeader = () =>
-    `<header class="header header2">
-      <div class="header__back">
-        <span class="back">
-          <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-          <img src="img/logo_small.png" width="101" height="44">
-        </span>
-      </div>
-      <h1 class="game__timer">NN</h1>
-      <div class="game__lives">
-        ${drawLives(3).join('')}
-      </div>
-    </header>`;
-
   const answers =
     `<form class="game__content">
       ${game.answers.map(drawAnswers).join('')}
     </form>`;
 
-  const stats =
-    `<div class="stats">
-      <ul class="stats">
-      ${statics.map((it) =>
-          `<li class="stats__result stats__result--${it}"></li>`
-        ).join('')}
-      </ul>
-    </div>`;
-
   const template =
-    `${drawHeader()}
+    `${drawHeader(live.value)}
       <div class="game">
         <p class="game__task">${game.question}</p>
         ${answers}
-        ${stats}
+        ${stats(verdict.results)}
       </div>`;
 
+  const steps = new Map();
+  const gameElement = compile(template);
+  let timeToStop = timer(gameElement);
 
-  const gameTwoElement = compile(template);
-  const prevBtn = gameTwoElement.querySelector('.back');
+  const getAnswer = (type, count) => {
+    const time = gameElement.querySelector('.game__timer').innerText;
+    const labels = game.answers[count].labels;
+    const answer = labels.find((it) => it.type === type);
 
-  prevBtn.addEventListener('click', () => appendToPage(getGameOne()));
-  let values = [];
-  const answerBtns = Array.from(gameTwoElement.querySelectorAll('.game__answer input'));
-  answerBtns.forEach((button) => button.addEventListener('click', (evt) => {
-    if (values.length < 1) {
-      values.push({name: evt.target.name, type: evt.target.value});
+    if (!answer) {
+      return null;
+    }
+
+    if (!answer.correct) {
+      live.calculate();
+    }
+
+    return {
+      time: time,
+      isCorrect: answer.correct
+    };
+  };
+
+  const countResults = () => {
+    const stepsEntries = steps.entries();
+    for (let step of stepsEntries) {
+      const stepType = step[1];
+      const stepCount = step[0];
+      const answer = getAnswer(stepType, stepCount);
+
+      if (!answer) {
+        continue;
+      }
+
+      verdict.append(answer);
+    }
+  };
+
+  const clickHandler = (evt) => {
+    const target = evt.target;
+    const type = target.value;
+    const count = +target.dataset.answer;
+
+    if (steps.has(count)) {
       return;
-    } else if (values.length === 1) {
-      values.push({name: evt.target.name, type: evt.target.value});
+    }
+
+    steps.set(count, type);
+
+    if (steps.size >= game.answers.length) {
+      countResults();
+      timeToStop();
+
+      if (!live.value) {
+        return;
+      }
       appendToPage(getNextQuestion());
     }
-  }));
+  };
 
-  return gameTwoElement;
+  const answerBtns = Array.from(gameElement.querySelectorAll('.game__answer input'));
+  answerBtns.forEach((button) => button.addEventListener('click', clickHandler));
+
+  return gameElement;
 };
 

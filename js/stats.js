@@ -1,9 +1,12 @@
 import compile from './compile';
 import getIntro from './intro';
 import appendToPage from './appendToPage';
+import verdict from './dataInfo/verdict';
 
 
-export default (statistics) => {
+const answers = verdict.value;
+
+export default () => {
   const header =
     `<header class="header">
       <div class="header__back">
@@ -14,41 +17,67 @@ export default (statistics) => {
       </div>
     </header>`;
 
-  const drawBonuses = (item) =>
-    `<tr>
+  const drawBonus = (count, bonus) => {
+    return `<tr>
       <td></td>
-      <td class="result__extra">${item.title}</td>
-      <td class="result__extra">${item.extra}&nbsp;<span class="stats__result stats__result--${item.type}"></span></td>
-      <td class="result__points">×&nbsp;${item.points}</td>
-      <td class="result__total">${item.total}</td>
+      <td class="result__extra">${bonus.title}</td>
+      <td class="result__extra">${count}&nbsp;<span class="stats__result stats__result--${bonus.type}"></span></td>
+      <td class="result__points">×&nbsp;${bonus.points}</td>
+      <td class="result__total">${count * bonus.points}</td>
     </tr>`;
+  };
 
-  const drawTables = (item) =>
-    `<table class="result__table">
+  const drawBonuses = (item) => {
+    if (!item.bonuses.length) {
+      return '';
+    }
+
+    return item.bonuses.map((it) => {
+      const bonus = verdict.getBonus(it.type);
+      return drawBonus(it.count, bonus);
+    }).join('');
+  };
+
+  const countTotalAmmount = (item) => {
+    return (item.fast * 50 + item.heart * 100) - (item.slow * 100);
+  };
+
+  const checkFinalResult = (item, total) => {
+    if (item.isCorrect) {
+      return `<td colspan="5" class="result__total result__total--final">${countTotalAmmount(total)}</td>`;
+    }
+    return '';
+  };
+
+  const drawTables = (item, i) => {
+    const states = verdict.getStates(item);
+    const totalBonuses = verdict.countBonuses(item);
+    return `<table class="result__table">
       <tr>
-        <td class="result__number">${item.count}.</td>
+        <td class="result__number">${i}.</td>
         <td colspan="2">
           <ul class="stats">
-            ${item.results.map((it) =>
+            ${states.map((it) =>
               `<li class="stats__result stats__result--${it}"></li>`
             ).join('')}
           </ul>
         </td>
-        <td class="result__points">×&nbsp;${item.cost_point}</td>
-        <td class="result__total">${item.cost_total}</td>
+        <td class="result__points">${item.isCorrect ? '×&nbsp;' + 50 : ''}</td>
+        <td class="result__total ${item.isCorrect ? '' : 'result__total--final'}">${item.isCorrect ? countTotalAmmount(totalBonuses) : 'FAIL'}</td>
       </tr>
-      ${item.bonuses ? item.bonuses.map(drawBonuses).join('') : ''}
+        ${drawBonuses(item)}
       <tr>
-        <td colspan="5" class="result__total result__total--final">${item.result_total}</td>
+        ${checkFinalResult(item, totalBonuses)}
       </tr>
     </table>`;
+  };
 
   const template =
-      `${header}
-        <div class="result">
-          <h1>${statistics.title}</h1>
-          ${statistics.total.map(drawTables).join('')}
-        </div>`;
+    `${header}
+      <div class="result">
+        <h1>${answers.length < 10 ? 'Проигрыш' : 'Победа'}</h1>
+        ${answers.map(drawTables).join('')}
+      </div>`;
 
   const statsElement = compile(template);
   const nextBtn = statsElement.querySelector('.back');

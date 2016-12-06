@@ -5,11 +5,11 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/705x455',
-        count: 1
+        count: 0
       }
     ]
   },
@@ -19,19 +19,19 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 1
+        count: 0
       },
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 2
+        count: 1
       }
     ]
   },
@@ -41,15 +41,18 @@ const data = [
     answers: [
       {
         picture: 'http://placehold.it/304x455',
-        count: 1
+        count: 0,
+        correct: true
       },
       {
         picture: 'http://placehold.it/304x455',
-        count: 2
+        count: 1,
+        correct: false
       },
       {
         picture: 'http://placehold.it/304x455',
-        count: 3
+        count: 2,
+        correct: false
       }
     ]
   },
@@ -59,11 +62,11 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/705x455',
-        count: 1
+        count: 0
       }
     ]
   },
@@ -73,19 +76,19 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 1
+        count: 0
       },
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 2
+        count: 1
       }
     ]
   },
@@ -95,15 +98,18 @@ const data = [
     answers: [
       {
         picture: 'http://placehold.it/304x455',
-        count: 1
+        count: 0,
+        correct: true
       },
       {
         picture: 'http://placehold.it/304x455',
-        count: 2
+        count: 1,
+        correct: false
       },
       {
         picture: 'http://placehold.it/304x455',
-        count: 3
+        count: 2,
+        correct: false
       }
     ]
   },
@@ -113,11 +119,11 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/705x455',
-        count: 1
+        count: 0
       }
     ]
   },
@@ -127,19 +133,19 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 1
+        count: 0
       },
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 2
+        count: 1
       }
     ]
   },
@@ -149,15 +155,18 @@ const data = [
     answers: [
       {
         picture: 'http://placehold.it/304x455',
-        count: 1
+        count: 0,
+        correct: true
       },
       {
         picture: 'http://placehold.it/304x455',
-        count: 2
+        count: 1,
+        correct: false
       },
       {
         picture: 'http://placehold.it/304x455',
-        count: 3
+        count: 2,
+        correct: false
       }
     ]
   },
@@ -167,11 +176,11 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/705x455',
-        count: 1
+        count: 0
       }
     ]
   },
@@ -181,19 +190,19 @@ const data = [
     answers: [
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 1
+        count: 0
       },
       {
         labels: [
-          {type: 'photo', text: 'Фото'},
-          {type: 'paint', text: 'Рисунок'},
+          {type: 'photo', text: 'Фото', correct: false},
+          {type: 'paint', text: 'Рисунок', correct: true},
         ],
         picture: 'http://placehold.it/468x458',
-        count: 2
+        count: 1
       }
     ]
   },
