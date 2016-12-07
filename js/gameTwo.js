@@ -60,6 +60,7 @@ export default (game, stat) => {
 
   const countResults = () => {
     const stepsEntries = steps.entries();
+    let compareAnswers = [];
     for (let step of stepsEntries) {
       const stepType = step[1];
       const stepCount = step[0];
@@ -69,7 +70,13 @@ export default (game, stat) => {
         continue;
       }
 
-      verdict.append(answer);
+      compareAnswers.push(answer);
+    }
+
+    if (compareAnswers[0].isCorrect && compareAnswers[1].isCorrect) {
+      verdict.append(compareAnswers[1]);
+    } else {
+      verdict.append({time: 0, isCorrect: false});
     }
   };
 
