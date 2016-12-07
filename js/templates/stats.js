@@ -1,11 +1,11 @@
 export default (stat) => {
 
-
-  let statistics = stat;
-
-  if (!statistics) {
-    statistics = [];
+  if (!stat) {
+    throw new RangeError('This function should append one argument');
   }
+
+  const statistics = stat;
+
   const stats =
     `<div class="stats">
       <ul class="stats">

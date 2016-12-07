@@ -5,7 +5,7 @@ import timer from './helpers/timer';
 import drawHeader from './templates/header';
 import stats from './templates/stats';
 import live from './helpers/live';
-import verdict from './dataInfo/verdict';
+import verdict from './helpers/verdict';
 
 
 export default (game, stat) => {

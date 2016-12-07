@@ -1,4 +1,13 @@
 export default (data) => {
+
+  if (data < 0 || data > 3) {
+    throw new RangeError('Lives coudnt be negative or more than 3');
+  }
+
+  if (!data) {
+    throw new RangeError('This function should append one argument');
+  }
+
   const defaultLives = 3;
 
   const drawLives = (lives) => {

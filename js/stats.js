@@ -1,7 +1,7 @@
 import compile from './compile';
 import getIntro from './intro';
 import appendToPage from './appendToPage';
-import verdict from './dataInfo/verdict';
+import verdict from './helpers/verdict';
 
 
 const answers = verdict.value;

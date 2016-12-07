@@ -3,7 +3,7 @@ import appendToPage from './appendToPage';
 import getRules from './rules';
 import getNextQuestion from './games';
 import getStats from './stats';
-import verdict from './dataInfo/verdict';
+import verdict from './helpers/verdict';
 import timer from './helpers/timer';
 import drawHeader from './templates/header';
 import stats from './templates/stats';
@@ -34,13 +34,13 @@ export default (game, stat) => {
       <div class="game">
         <p class="game__task">${game.question}</p>
         ${answers}
-        ${stats(stat)}
+        ${stat ? stats(stat) : stats([])}
       </div>`;
 
   const steps = new Map();
   const gameElement = compile(template);
   const prevBtn = gameElement.querySelector('.back');
-  let timeToStop = timer(gameElement);
+  let timeToStop = timer(gameElement, 30);
 
   prevBtn.addEventListener('click', () => appendToPage(getRules()));
 

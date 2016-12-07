@@ -2,7 +2,7 @@ import getGameOne from './gameOne';
 import getGameTwo from './gameTwo';
 import getGameThree from './gameThree';
 import game from './dataInfo/gameData';
-import verdict from './dataInfo/verdict';
+import verdict from './helpers/verdict';
 import getStats from './stats';
 
 

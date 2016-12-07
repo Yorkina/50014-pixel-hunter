@@ -5,7 +5,7 @@ import timer from './helpers/timer';
 import drawHeader from './templates/header';
 import stats from './templates/stats';
 import live from './helpers/live';
-import verdict from './dataInfo/verdict';
+import verdict from './helpers/verdict';
 
 
 export default (game, stat) => {
@@ -37,7 +37,7 @@ export default (game, stat) => {
 
   const steps = new Map();
   const gameElement = compile(template);
-  let timeToStop = timer(gameElement);
+  let timeToStop = timer(gameElement, 30);
 
   const getAnswer = (type, count) => {
     const time = gameElement.querySelector('.game__timer').innerText;
