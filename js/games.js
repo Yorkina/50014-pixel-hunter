@@ -9,7 +9,18 @@ import getStats from './stats';
 let currentQuestionNum = 0;
 
 export default () => {
-  const results = verdict.results;
+  const results = verdict.value;
+  const answers = results.map((it) => {
+    return verdict.getStates(it);
+  });
+
+  const deleteExtraResults = (it) => {
+    return it !== 'heart';
+  };
+
+  const total = answers.reduce((sequence, it) => sequence.concat(it), []);
+  const filtered = total.filter(deleteExtraResults);
+
   const makeQuestion = (data) => {
     let element;
 
@@ -18,17 +29,17 @@ export default () => {
       case 'level3':
       case 'level6':
       case 'level9':
-        element = getGameOne(data, results);
+        element = getGameOne(data, filtered);
         break;
       case 'level1':
       case 'level4':
       case 'level7':
-        element = getGameTwo(data, results);
+        element = getGameTwo(data, filtered);
         break;
       case 'level2':
       case 'level5':
       case 'level8':
-        element = getGameThree(data, results);
+        element = getGameThree(data, filtered);
         break;
       default:
         element = getStats();

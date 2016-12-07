@@ -24,7 +24,7 @@ export default (game, stat) => {
       <div class="game">
         <p class="game__task">${game.question}</p>
         ${answers}
-        ${stats(verdict.results)}
+        ${stats(stat)}
       </div>`;
 
   const gameElement = compile(template);

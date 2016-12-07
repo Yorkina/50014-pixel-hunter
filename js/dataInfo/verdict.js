@@ -38,10 +38,6 @@ class Verdict {
     return this._accumulate;
   }
 
-  get results() {
-    return this.value.reduce((sequence, it) => sequence.concat(it.results), []);
-  }
-
   getLivesFromData() {
     return live.valueArray;
   }
@@ -86,7 +82,6 @@ class Verdict {
     const isCorrect = source.isCorrect;
     const item = {
       bonuses: [],
-      results: [],
       isCorrect
     };
 
@@ -94,14 +89,12 @@ class Verdict {
       const bonus = this._ensureBonus(item, BONUSES_TYPE.FAST);
       bonus.count += 1;
       item.bonuses.push(bonus);
-      item.results.push(BONUSES_TYPE.FAST);
     }
 
     if (isCorrect && time < 20) {
       const bonus = this._ensureBonus(item, BONUSES_TYPE.SLOW);
       bonus.count += 1;
       item.bonuses.push(bonus);
-      item.results.push(BONUSES_TYPE.SLOW);
     }
 
     if (isCorrect) {
@@ -113,9 +106,6 @@ class Verdict {
       });
 
       item.bonuses.push(bonus);
-      item.results.push('correct');
-    } else {
-      item.results.push('wrong');
     }
 
     this.value.push(item);
